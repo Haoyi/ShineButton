@@ -6,14 +6,7 @@ import android.graphics.Canvas;
 import com.daasuu.ei.Ease;
 import com.daasuu.ei.EasingInterpolator;
 
-/**
- * @author Chad
- * @title com.xiaoyan.shinebutton_core
- * @description
- * @modifier
- * @date
- * @since 16/7/5 下午5:09
- **/
+
 public class ShineAnimator extends ValueAnimator {
 
     float MAX_VALUE = 1.5f;

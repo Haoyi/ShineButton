@@ -16,14 +16,7 @@ import com.xiaoyan.shinebutton_core.listener.SimpleAnimatorListener;
 
 import java.util.Random;
 
-/**
- * @author Chad
- * @title com.xiaoyan.shinebutton_core
- * @description
- * @modifier
- * @date
- * @since 16/7/5 下午3:57
- **/
+
 public class ShineView extends View {
     private static final String TAG = "ShineView";
 

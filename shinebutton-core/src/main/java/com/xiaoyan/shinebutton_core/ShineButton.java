@@ -20,14 +20,7 @@ import android.view.animation.LinearInterpolator;
 
 import com.xiaoyan.shinebutton_core.listener.SimpleAnimatorListener;
 
-/**
- * @author Chad
- * @title com.xiaoyan.shinebutton_core
- * @description
- * @modifier
- * @date
- * @since 16/7/5 下午2:27
- **/
+
 public class ShineButton extends PorterShapeImageView {
     private static final String TAG = "ShineButton";
     private boolean isChecked = false;
