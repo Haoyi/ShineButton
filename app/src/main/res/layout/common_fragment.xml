@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
 
-                <com.sackcentury.shinebuttonlib.ShineButton
+                <com.xiaoyan.shinebutton_core.ShineButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
@@ -44,7 +44,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
 
-                <com.sackcentury.shinebuttonlib.ShineButton
+                <com.xiaoyan.shinebutton_core.ShineButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"
@@ -61,7 +61,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
 
-                <com.sackcentury.shinebuttonlib.ShineButton
+                <com.xiaoyan.shinebutton_core.ShineButton
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerInParent="true"

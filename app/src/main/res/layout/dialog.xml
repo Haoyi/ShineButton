@@ -13,7 +13,7 @@
         android:padding="10dp"
         android:text="ShineButton" />
 
-    <com.sackcentury.shinebuttonlib.ShineButton
+    <com.xiaoyan.shinebutton_core.ShineButton
         android:id="@+id/po_image"
         android:layout_width="30dp"
         android:layout_height="30dp"

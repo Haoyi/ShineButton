@@ -13,7 +13,7 @@
         android:id="@+id/text_item_id"
         android:padding="10dp" />
 
-    <com.sackcentury.shinebuttonlib.ShineButton
+    <com.xiaoyan.shinebutton_core.ShineButton
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_margin="20dp"

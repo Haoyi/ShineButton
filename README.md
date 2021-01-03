@@ -51,7 +51,7 @@ app:allow_random_color
 ![preview](https://github.com/ChadCSong/ShineButton/blob/master/image/demo_small.gif)
 
 ```xml
- <com.sackcentury.shinebuttonlib.ShineButton
+ <com.xiaoyan.shinebutton_core.ShineButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
@@ -93,7 +93,7 @@ app:enable_flashing="true"
 
 
  ```xml
- <com.sackcentury.shinebuttonlib.ShineButton
+ <com.xiaoyan.shinebutton_core.ShineButton
                  android:layout_width="50dp"
                  android:layout_height="50dp"
                  android:layout_centerInParent="true"
@@ -138,7 +138,7 @@ Easy to support.
 
 ```xml
 <dependency>
-  <groupId>com.sackcentury</groupId>
+  <groupId>com.xiaoyan</groupId>
   <artifactId>shinebutton</artifactId>
   <version>1.0.0</version>
   <type>aar</type>
@@ -153,7 +153,7 @@ buildscript {
     }
 }
 dependencies {
-    compile 'com.sackcentury:shinebutton:1.0.0'
+    compile 'com.xiaoyan:shinebutton:1.0.0'
 }
 ```
 
