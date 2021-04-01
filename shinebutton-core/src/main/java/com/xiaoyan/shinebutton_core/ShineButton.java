@@ -9,7 +9,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -17,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.LinearInterpolator;
+
+import androidx.core.content.ContextCompat;
 
 import com.xiaoyan.shinebutton_core.listener.SimpleAnimatorListener;
 
@@ -34,7 +35,8 @@ public class ShineButton extends PorterShapeImageView {
     DisplayMetrics metrics = new DisplayMetrics();
 
 
-    Activity activity;
+    Activity mActivity;
+    Context mContext;
     ShineView shineView;
     ValueAnimator shakeAnimator;
     ShineView.ShineParams shineParams = new ShineView.ShineParams();
@@ -47,6 +49,7 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context) {
         super(context);
+        mContext = context;
         if (context instanceof Activity) {
             init((Activity) context);
         }
@@ -54,12 +57,14 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         initButton(context, attrs);
     }
 
 
     public ShineButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         initButton(context, attrs);
     }
 
@@ -216,7 +221,7 @@ public class ShineButton extends PorterShapeImageView {
     OnButtonClickListener onButtonClickListener;
 
     public void init(Activity activity) {
-        this.activity = activity;
+        this.mActivity = activity;
         onButtonClickListener = new OnButtonClickListener();
         setOnClickListener(onButtonClickListener);
 
@@ -235,15 +240,15 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void showAnim() {
-        if (activity != null) {
-            shineView = new ShineView(activity, this, shineParams);
+        if (mActivity != null) {
+            shineView = new ShineView(mActivity, this, shineParams);
             ViewGroup rootView;
             if ( mFixDialog != null && mFixDialog.getWindow() != null ) {
                 rootView = (ViewGroup) mFixDialog.getWindow().getDecorView();
                 View innerView = rootView.findViewById(android.R.id.content);
                 rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
             } else {
-                rootView = (ViewGroup) activity.getWindow().getDecorView();
+                rootView = (ViewGroup) mActivity.getWindow().getDecorView();
                 rootView.addView(shineView, new ViewGroup.LayoutParams(rootView.getWidth(), rootView.getHeight()));
             }
             doShareAnim();
@@ -253,8 +258,8 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void removeView(View view) {
-        if (activity != null) {
-            final ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+        if (mActivity != null) {
+            final ViewGroup rootView = (ViewGroup) mActivity.findViewById(Window.ID_ANDROID_CONTENT);
             rootView.removeView(view);
         } else {
             Log.e(TAG, "Please init.");
@@ -262,10 +267,8 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void setShapeResource(int raw) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setShape(getResources().getDrawable(raw, null));
-        } else {
-            setShape(getResources().getDrawable(raw));
+        if(mContext!=null) {
+            setShape(ContextCompat.getDrawable(mContext, raw));
         }
     }
 
@@ -308,12 +311,12 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     private void calPixels() {
-        if (activity != null && metrics != null) {
-            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        if (mActivity != null && metrics != null) {
+            metrics = mContext.getResources().getDisplayMetrics();
             int[] location = new int[2];
             getLocationInWindow(location);
             Rect visibleFrame = new Rect();
-            activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            mActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
             realBottomHeight = visibleFrame.height() - location[1];
             bottomHeight = metrics.heightPixels - location[1];
         }
