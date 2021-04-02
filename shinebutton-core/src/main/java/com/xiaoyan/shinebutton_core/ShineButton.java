@@ -26,8 +26,8 @@ public class ShineButton extends PorterShapeImageView {
     private static final String TAG = "ShineButton";
     private boolean isChecked = false;
 
-    private int btnColor;
-    private int btnFillColor;
+    private int btnColor = 0;
+    private int btnFillColor = 0;
 
     int DEFAULT_WIDTH = 50;
     int DEFAULT_HEIGHT = 50;
@@ -42,7 +42,7 @@ public class ShineButton extends PorterShapeImageView {
     ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
     OnCheckedChangeListener listener;
-    OnStatusListener statusListener;
+    boolean initialPressed = false;
 
     private int bottomHeight;
     private int realBottomHeight;
@@ -50,14 +50,16 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context) {
         super(context);
+        Log.d(TAG,"11111");
         mContext = context;
         if (context instanceof Activity) {
-            init((Activity) context);
+            init((Activity) context,false);
         }
     }
 
     public ShineButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Log.d(TAG,"2222");
         mContext = context;
         initButton(context, attrs);
     }
@@ -65,15 +67,13 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        Log.d(TAG,"33333");
         mContext = context;
         initButton(context, attrs);
     }
 
     private void initButton(Context context, AttributeSet attrs) {
 
-        if (context instanceof Activity) {
-            init((Activity) context);
-        }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShineButton);
         btnColor = a.getColor(R.styleable.ShineButton_btn_color, Color.GRAY);
         btnFillColor = a.getColor(R.styleable.ShineButton_btn_fill_color, Color.BLACK);
@@ -89,21 +89,12 @@ public class ShineButton extends PorterShapeImageView {
         shineParams.smallShineOffsetAngle = a.getFloat(R.styleable.ShineButton_small_shine_offset_angle, shineParams.smallShineOffsetAngle);
         shineParams.shineSize = a.getDimensionPixelSize(R.styleable.ShineButton_shine_size, shineParams.shineSize);
         a.recycle();
-        setSrcColor(btnColor);
-    }
 
-    /**
-     * 检查系统中存储的功能按钮是否是打开的状态。如果只打开的，设置按钮为按下状态。
-     */
-    private void checkStatus() {
-        if (this.statusListener!=null){
-            boolean status = statusListener.getStatusFromStorage();
-            if(status){
-                setSrcColor(btnFillColor);
-                isChecked = true;
-            }
+        if (context instanceof Activity) {
+            init((Activity) context,false);
         }
     }
+
     public void setFixDialog(Dialog fixDialog) {
         mFixDialog = fixDialog;
     }
@@ -233,10 +224,18 @@ public class ShineButton extends PorterShapeImageView {
 
     OnButtonClickListener buttonClickListener;
 
-    public void init(Activity activity) {
+    public void init(Activity activity,boolean pressed) {
         this.mActivity = activity;
+        this.initialPressed = pressed;
         buttonClickListener = new OnButtonClickListener();
         setOnClickListener(buttonClickListener);
+        if (pressed){
+            setSrcColor(btnFillColor==0 ? Color.RED:btnFillColor);
+            isChecked = true;
+        }else{
+            setSrcColor(btnColor==0 ? Color.GRAY:btnFillColor);
+            isChecked = false;
+        }
 
     }
 
@@ -370,16 +369,4 @@ public class ShineButton extends PorterShapeImageView {
     }
 
 
-    /**
-     * 注册获取状态的回调监听函数
-     **/
-    public void setOnStatusListener(OnStatusListener listener) {
-        this.statusListener = listener;
-    }
-    /**
-     * 从存储中获取按钮状态
-     * */
-    public interface OnStatusListener {
-        boolean getStatusFromStorage();
-    }
 }

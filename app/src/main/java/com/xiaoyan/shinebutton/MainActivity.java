@@ -45,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
 
         if (shineButton != null)
-            shineButton.init(this);
+            shineButton.init(this,true);
         porterShapeImageView1 = (ShineButton) findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
-            porterShapeImageView1.init(this);
+            porterShapeImageView1.init(this,true);
         porterShapeImageView2 = (ShineButton) findViewById(R.id.po_image2);
         if (porterShapeImageView2 != null)
-            porterShapeImageView2.init(this);
+            porterShapeImageView2.init(this,true);
         porterShapeImageView3 = (ShineButton) findViewById(R.id.po_image3);
         if (porterShapeImageView3 != null)
-            porterShapeImageView3.init(this);
+            porterShapeImageView3.init(this,true);
 
 
         ShineButton shineButtonJava = new ShineButton(this);
@@ -84,12 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        shineButton.setOnStatusListener(new ShineButton.OnStatusListener() {
-            @Override
-            public boolean getStatusFromStorage() {
-                return true;
-            }
-        });
+
 
         porterShapeImageView2.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,7 +40,7 @@ public class FragmentDemo extends Fragment {
 
     private void initData() {
         ShineButton shineButton1 = (ShineButton) rootView.findViewById(R.id.po_image1);
-        shineButton1.init((MainActivity) getActivity());
+        shineButton1.init((MainActivity) getActivity(),true);
 
         ShineButton shineButton2 = (ShineButton) rootView.findViewById(R.id.po_image2);
         ShineButton shineButton3 = (ShineButton) rootView.findViewById(R.id.po_image3);
