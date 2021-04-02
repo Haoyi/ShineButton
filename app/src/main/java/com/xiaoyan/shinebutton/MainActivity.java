@@ -84,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        shineButton.setOnStatusListener(new ShineButton.OnStatusListener() {
+            @Override
+            public boolean getStatusFromStorage() {
+                return true;
+            }
+        });
+
         porterShapeImageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

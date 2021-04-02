@@ -42,6 +42,7 @@ public class ShineButton extends PorterShapeImageView {
     ShineView.ShineParams shineParams = new ShineView.ShineParams();
 
     OnCheckedChangeListener listener;
+    OnStatusListener statusListener;
 
     private int bottomHeight;
     private int realBottomHeight;
@@ -91,6 +92,18 @@ public class ShineButton extends PorterShapeImageView {
         setSrcColor(btnColor);
     }
 
+    /**
+     * 检查系统中存储的功能按钮是否是打开的状态。如果只打开的，设置按钮为按下状态。
+     */
+    private void checkStatus() {
+        if (this.statusListener!=null){
+            boolean status = statusListener.getStatusFromStorage();
+            if(status){
+                setSrcColor(btnFillColor);
+                isChecked = true;
+            }
+        }
+    }
     public void setFixDialog(Dialog fixDialog) {
         mFixDialog = fixDialog;
     }
@@ -207,8 +220,8 @@ public class ShineButton extends PorterShapeImageView {
         if (l instanceof OnButtonClickListener) {
             super.setOnClickListener(l);
         } else {
-            if (onButtonClickListener != null) {
-                onButtonClickListener.setListener(l);
+            if (buttonClickListener != null) {
+                buttonClickListener.setListener(l);
             }
         }
     }
@@ -218,12 +231,12 @@ public class ShineButton extends PorterShapeImageView {
     }
 
 
-    OnButtonClickListener onButtonClickListener;
+    OnButtonClickListener buttonClickListener;
 
     public void init(Activity activity) {
         this.mActivity = activity;
-        onButtonClickListener = new OnButtonClickListener();
-        setOnClickListener(onButtonClickListener);
+        buttonClickListener = new OnButtonClickListener();
+        setOnClickListener(buttonClickListener);
 
     }
 
@@ -243,7 +256,7 @@ public class ShineButton extends PorterShapeImageView {
         if (mActivity != null) {
             shineView = new ShineView(mActivity, this, shineParams);
             ViewGroup rootView;
-            if ( mFixDialog != null && mFixDialog.getWindow() != null ) {
+            if (mFixDialog != null && mFixDialog.getWindow() != null) {
                 rootView = (ViewGroup) mFixDialog.getWindow().getDecorView();
                 View innerView = rootView.findViewById(android.R.id.content);
                 rootView.addView(shineView, new ViewGroup.LayoutParams(innerView.getWidth(), innerView.getHeight()));
@@ -267,7 +280,7 @@ public class ShineButton extends PorterShapeImageView {
     }
 
     public void setShapeResource(int raw) {
-        if(mContext!=null) {
+        if (mContext != null) {
             setShape(ContextCompat.getDrawable(mContext, raw));
         }
     }
@@ -356,4 +369,17 @@ public class ShineButton extends PorterShapeImageView {
         void onCheckedChanged(View view, boolean checked);
     }
 
+
+    /**
+     * 注册获取状态的回调监听函数
+     **/
+    public void setOnStatusListener(OnStatusListener listener) {
+        this.statusListener = listener;
+    }
+    /**
+     * 从存储中获取按钮状态
+     * */
+    public interface OnStatusListener {
+        boolean getStatusFromStorage();
+    }
 }
