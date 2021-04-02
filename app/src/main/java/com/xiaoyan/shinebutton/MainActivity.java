@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.wrapper);
 
         if (shineButton != null)
-            shineButton.init(this,true);
+            shineButton.init(this,false);
         porterShapeImageView1 = (ShineButton) findViewById(R.id.po_image1);
         if (porterShapeImageView1 != null)
             porterShapeImageView1.init(this,true);

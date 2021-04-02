@@ -50,7 +50,6 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context) {
         super(context);
-        Log.d(TAG,"11111");
         mContext = context;
         if (context instanceof Activity) {
             init((Activity) context,false);
@@ -59,7 +58,6 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Log.d(TAG,"2222");
         mContext = context;
         initButton(context, attrs);
     }
@@ -67,7 +65,6 @@ public class ShineButton extends PorterShapeImageView {
 
     public ShineButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        Log.d(TAG,"33333");
         mContext = context;
         initButton(context, attrs);
     }
@@ -233,7 +230,7 @@ public class ShineButton extends PorterShapeImageView {
             setSrcColor(btnFillColor==0 ? Color.RED:btnFillColor);
             isChecked = true;
         }else{
-            setSrcColor(btnColor==0 ? Color.GRAY:btnFillColor);
+            setSrcColor(btnColor==0 ? Color.GRAY:btnColor);
             isChecked = false;
         }
 
